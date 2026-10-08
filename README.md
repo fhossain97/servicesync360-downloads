@@ -277,6 +277,6 @@ Third-party frameworks, libraries, services, names, and trademarks remain subjec
 
 ## 🐰 Author
 
-Farhana Hossain
-Full-Stack Software Engineer
-Master of Science in Software Engineering
+Farhana Hossain<br>
+Full-Stack Software Engineer<br>
+Master of Science in Software Engineering<br>
