@@ -7,6 +7,20 @@ ServiceSync360 is a desktop customer relationship management (CRM) application d
 The application was created as a Master of Science in Software Engineering capstone and inspired by my firsthand frustration with the fragmented and inefficient technology commonly used in automotive service departments. The current release is a functional proof of concept and a foundation for a more comprehensive dealership CRM.
 
 ---
+
+## 📥 Download ServiceSync360
+
+Installers are published in the separate public [ServiceSync360 Downloads repository](https://github.com/fhossain97/servicesync360-downloads/releases/tag/v0.1.2). The application source code remains private and is not included with the installers.
+
+Choose the package that matches the computer's operating system and processor:
+
+| Operating system | Processor                                   | Package           |
+| ---------------- | ------------------------------------------- | ----------------- |
+| macOS            | Apple Silicon, including M1, M2, M3, and M4 | macOS ARM64 DMG   |
+| macOS            | Intel                                       | macOS x64 DMG     |
+| Windows          | ARM64                                       | Windows ARM64 EXE |
+| Windows          | x64                                         | Windows x64 EXE   |
+
 ## 🛠️ Installation
 
 ### macOS
@@ -16,7 +30,9 @@ The application was created as a Master of Science in Software Engineering capst
 3. Drag ServiceSync360 into the Applications folder.
 4. Open ServiceSync360 from Applications.
 
-The current macOS build is not signed or notarized with an Apple Developer certificate at this time. If macOS blocks the first launch:
+The current macOS build is not signed or notarized with an Apple Developer certificate. Gatekeeper may therefore prevent the application from opening the first time.
+
+If macOS provides an **Open Anyway** option:
 
 1. Attempt to open ServiceSync360 once.
 2. Open **System Settings**.
@@ -24,7 +40,22 @@ The current macOS build is not signed or notarized with an Apple Developer certi
 4. Find the ServiceSync360 security message and select **Open Anyway**.
 5. Confirm the launch when prompted.
 
-Only install packages obtained from the official release repository.
+If the warning only provides **Move to Trash** and **Cancel**, select **Cancel**. Then open Terminal and confirm the installed application path:
+
+```bash
+find /Applications -maxdepth 1 -iname "*servicesync360*.app" -print
+```
+
+If the command returns `/Applications/servicesync360.app`, remove the quarantine attribute from only that application and reopen it:
+
+```bash
+sudo xattr -dr com.apple.quarantine "/Applications/servicesync360.app"
+open "/Applications/servicesync360.app"
+```
+
+Enter the Mac login password when prompted. Terminal does not display password characters while they are entered. If the `find` command returns a differently capitalized application path, use that exact path in both commands.
+
+This procedure removes the download quarantine attribute only from ServiceSync360; it does not disable Gatekeeper for other applications. Only perform this override after downloading the installer from the official release repository and confirming that the expected application was copied into the Applications folder. Do not override a warning stating that the application **will damage your computer**.
 
 ### Windows
 
@@ -151,6 +182,52 @@ The capstone release focuses on customer and vehicle records, search, service hi
 The current release does not include appointment scheduling, detailed technician service tracking, loaner vehicle management, customer-facing access, real-time customer notifications, digital customer approvals, automated follow-up scheduling, external dealership-system integrations, advanced reporting, or production-ready offline synchronization. Payment information, driver's license records, and insurance documents are also outside the approved data scope.
 
 Apple Developer signing and notarization, broad operating-system certification, multi-dealership production deployment, and large-scale load testing are not included in this release.
+
+---
+
+## 🛣️ Future Development
+
+ServiceSync360 was designed as a foundation that can be expanded beyond the capstone. Planned development includes the following areas.
+
+### Service workflow
+
+- Add appointment scheduling and calendar-based service planning.
+- Introduce detailed technician service tracking, including work progress and time recorded against individual service lines.
+- Support technician inspection photos and videos within the repair order.
+- Add configurable repair order assignment while preserving manager override controls.
+- Add loaner vehicle availability, assignment, and return tracking.
+- Support automated follow-up scheduling and next-service reminders.
+
+### Customer experience
+
+- Provide a secure customer-facing experience for viewing service progress.
+- Send direct status updates as repair order work advances.
+- Add digital approval or decline options for recommended services.
+- Expand digital documentation while keeping sensitive payment, driver's license, and insurance information protected by an approved data-handling design.
+
+### Data and dealership integration
+
+- Connect approved external service history sources to improve record completeness.
+- Expand ServiceSync360 beyond the service department into a dealership-wide CRM supporting Parts, Finance, Administration, Sales, and other approved departments.
+- Add department-specific workflows, permissions, and shared records so authorized employees can work across dealership operations without losing role-based control.
+- Integrate with dealership management, parts inventory, and other authorized operational systems.
+- Support secure multi-dealership deployment with stronger tenant administration and data separation controls.
+- Add reliable offline operation, recovery, and synchronization for interrupted connections.
+
+### Reporting and intelligence
+
+- Add management dashboards for service metrics, repair order summaries, service history trends, and advisor activity.
+- Expand audit reporting while preserving read-only audit records.
+- Measure the use and outcomes of AI-assisted recommendations.
+- Develop a more specialized automotive AI system that learns from approved service outcomes while continuing to require professional review.
+
+### Production readiness
+
+- Add Apple Developer signing and notarization and strengthen installer trust for supported platforms. This requirement may change in the future as the CRM progresses.
+- Expand operating-system compatibility testing, automated regression testing, performance testing, monitoring, backup, and recovery procedures.
+- Prepare the application for controlled production deployment, release management, and ongoing support.
+
+Future features will be introduced in phases so that security, data integrity, and the stability of the repair order workflow remain the primary priorities.
 
 ---
 
